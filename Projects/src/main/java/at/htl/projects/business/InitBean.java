@@ -56,12 +56,6 @@ public class InitBean {
         Project houseAutomation = new Project("Hausautomation","Visualisierung für SmartHome");
         Project leonie = new Project("Leonie","Avatar der HTL-Leonding");
 
-        em.persist(mig);
-        em.persist(ear);
-        em.persist(voting);
-        em.persist(houseAutomation);
-        em.persist(leonie);
-
         Meeting m1 = new Meeting(LocalDateTime.now(),"Sprint Review Oktober");
         Meeting m2 = new Meeting(LocalDateTime.now().plusMonths(1), "Sprint Review November");
         Meeting e1 = new Meeting(LocalDateTime.now().plusDays(20), "Elba Testsitzng");
@@ -70,13 +64,42 @@ public class InitBean {
         Meeting h1 = new Meeting(LocalDateTime.now(), "Sensorentest");
         Meeting l1 = new Meeting(LocalDateTime.now().plusMonths(2), "Tag der offenen Tür Generalprobe");
 
-        em.persist(m1);
-        em.persist(m2);
-        em.persist(e1);
-        em.persist(e2);
-        em.persist(v1);
-        em.persist(h1);
-        em.persist(l1);
+        wimmer.getMeetings().add(m1);
+        m1.getAttendants().add(wimmer);
+        haspel.getMeetings().add(m1);
+        m1.getAttendants().add(haspel);
+        waltz.getMeetings().add(m1);
+        m1.getAttendants().add(waltz);
+        weinheber.getMeetings().add(m1);
+        m1.getAttendants().add(weinheber);
+        wimmer.getMeetings().add(m2);
+        m2.getAttendants().add(wimmer);
+        haspel.getMeetings().add(m2);
+        m2.getAttendants().add(haspel);
+        weinheber.getMeetings().add(m2);
+        m2.getAttendants().add(weinheber);
+        schwarz.getMeetings().add(e1);
+        e1.getAttendants().add(schwarz);
+        riedl.getMeetings().add(e1);
+        e1.getAttendants().add(riedl);
+        riedl.getMeetings().add(e2);
+        e2.getAttendants().add(riedl);
+        schwarz.getMeetings().add(e2);
+        e2.getAttendants().add(schwarz);
+        waltz.getMeetings().add(v1);
+        v1.getAttendants().add(waltz);
+        kress.getMeetings().add(v1);
+        v1.getAttendants().add(kress);
+        egger.getMeetings().add(h1);
+        h1.getAttendants().add(egger);
+        bauer.getMeetings().add(h1);
+        h1.getAttendants().add(bauer);
+        haas.getMeetings().add(l1);
+        l1.getAttendants().add(haas);
+        schuster.getMeetings().add(l1);
+        l1.getAttendants().add(schuster);
+        winkler.getMeetings().add(l1);
+        l1.getAttendants().add(winkler);
 
         mig.getMembers().add(wimmer);
         mig.getMembers().add(weinheber);
@@ -93,25 +116,6 @@ public class InitBean {
         houseAutomation.setSupervisor(egger);
         leonie.setSupervisor(haas);
 
-        m1.getAttendants().add(wimmer);
-        m1.getAttendants().add(haspel);
-        m1.getAttendants().add(waltz);
-        m1.getAttendants().add(weinheber);
-        m2.getAttendants().add(wimmer);
-        m2.getAttendants().add(haspel);
-        m2.getAttendants().add(weinheber);
-        e1.getAttendants().add(schwarz);
-        e1.getAttendants().add(riedl);
-        e2.getAttendants().add(riedl);
-        e2.getAttendants().add(schwarz);
-        v1.getAttendants().add(waltz);
-        v1.getAttendants().add(kress);
-        h1.getAttendants().add(egger);
-        h1.getAttendants().add(bauer);
-        l1.getAttendants().add(haas);
-        l1.getAttendants().add(schuster);
-        l1.getAttendants().add(winkler);
-
         mig.getMeetings().add(m1);
         mig.getMeetings().add(m2);
         ear.getMeetings().add(e1);
@@ -119,6 +123,20 @@ public class InitBean {
         voting.getMeetings().add(v1);
         houseAutomation.getMeetings().add(h1);
         leonie.getMeetings().add(l1);
+
+        em.persist(m1);
+        em.persist(m2);
+        em.persist(e1);
+        em.persist(e2);
+        em.persist(v1);
+        em.persist(h1);
+        em.persist(l1);
+
+        em.persist(mig);
+        em.persist(ear);
+        em.persist(voting);
+        em.persist(houseAutomation);
+        em.persist(leonie);
 
         System.out.println("Finished");
     }
