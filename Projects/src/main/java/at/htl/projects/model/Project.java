@@ -18,18 +18,12 @@ public class Project {
     private String name;
     private String description;
 
-    @JsonbTransient
-    @XmlTransient
     @OneToMany
     private List<Student> members;
 
-    @JsonbTransient
-    @XmlTransient
     @OneToOne
     private Teacher supervisor;
 
-    @JsonbTransient
-    @XmlTransient
     @OneToMany
     private List<Meeting> meetings;
 

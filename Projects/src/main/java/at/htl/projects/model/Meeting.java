@@ -1,24 +1,21 @@
 package at.htl.projects.model;
 
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 @Entity(name = "meeting")
 public class Meeting {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDateTime date;
     private String description;
 
-    @JsonbTransient
-    @XmlTransient
-    @OneToMany
+    @ManyToMany(mappedBy = "meetings")
     private List<Person> attendants;
 
     //region Constructors
@@ -64,5 +61,6 @@ public class Meeting {
     public void setAttendants(List<Person> attendants) {
         this.attendants = attendants;
     }
+
     //endregion
 }
