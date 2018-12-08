@@ -1,29 +1,24 @@
 package at.htl.projects.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 @Entity(name = "meeting")
 public class Meeting {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private LocalDateTime date;
     private String description;
 
-    @ManyToMany(mappedBy = "meetings")
-    private List<Person> attendants;
-
     //region Constructors
     public Meeting(){
-        attendants = new LinkedList<Person>();
     }
     public Meeting(LocalDateTime date, String description){
-        attendants = new LinkedList<Person>();
         this.date = date;
         this.description = description;
     }
@@ -52,14 +47,6 @@ public class Meeting {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Person> getAttendants() {
-        return attendants;
-    }
-
-    public void setAttendants(List<Person> attendants) {
-        this.attendants = attendants;
     }
 
     //endregion

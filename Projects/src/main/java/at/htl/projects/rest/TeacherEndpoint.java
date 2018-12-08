@@ -1,5 +1,6 @@
 package at.htl.projects.rest;
 
+import at.htl.projects.model.Person;
 import at.htl.projects.model.Teacher;
 
 import javax.ejb.Stateless;
@@ -19,9 +20,9 @@ public class TeacherEndpoint{
     @GET
     @Path("{id}")
     public Response getTeacher(@PathParam("id") long id){
-        TypedQuery<Teacher> query = em.createNamedQuery("Person.findById", Teacher.class);
+        TypedQuery<Person> query = em.createNamedQuery("Person.findById", Person.class);
         query.setParameter("Id",id);
-        Teacher t = query.getSingleResult();
+        Teacher t = (Teacher) query.getSingleResult();
         if(t != null){
             return Response.ok().entity(t).build();
         }
@@ -31,9 +32,9 @@ public class TeacherEndpoint{
     @DELETE
     @Path("delete/{id}")
     public Response deleteStudent(@PathParam("id") long id){
-        TypedQuery<Teacher> query = em.createNamedQuery("Person.findById", Teacher.class);
+        TypedQuery<Person> query = em.createNamedQuery("Person.findById", Person.class);
         query.setParameter("Id",id);
-        Teacher t = query.getSingleResult();
+        Teacher t = (Teacher) query.getSingleResult();
         if(t != null){
             em.remove(t);
             return Response.ok().build();
