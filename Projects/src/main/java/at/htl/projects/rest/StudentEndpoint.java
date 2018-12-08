@@ -1,6 +1,6 @@
 package at.htl.projects.rest;
 
-import at.htl.projects.model.Project;
+import at.htl.projects.model.Student;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -11,31 +11,31 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Stateless
-@Path("projects")
-public class ProjectEndpoint{
+@Path("students")
+public class StudentEndpoint{
     @PersistenceContext
     EntityManager em;
 
     @GET
     @Path("{id}")
-    public Response getProject(@PathParam("id") long id){
-        TypedQuery<Project> query = em.createNamedQuery("Project.findById", Project.class);
+    public Response getStudent(@PathParam("id") long id){
+        TypedQuery<Student> query = em.createNamedQuery("Person.findById", Student.class);
         query.setParameter("Id",id);
-        Project p = query.getSingleResult();
-        if(p != null){
-            return Response.ok().entity(p).build();
+        Student s = query.getSingleResult();
+        if(s != null){
+            return Response.ok().entity(s).build();
         }
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
     @DELETE
     @Path("delete/{id}")
-    public Response deleteProject(@PathParam("id") long id){
-        TypedQuery<Project> query = em.createNamedQuery("Person.findById", Project.class);
+    public Response deleteStudent(@PathParam("id") long id){
+        TypedQuery<Student> query = em.createNamedQuery("Person.findById", Student.class);
         query.setParameter("Id",id);
-        Project p = query.getSingleResult();
-        if(p != null){
-            em.remove(p);
+        Student s = query.getSingleResult();
+        if(s != null){
+            em.remove(s);
             return Response.ok().build();
         }
         return Response.status(Response.Status.NOT_FOUND).build();
@@ -44,8 +44,8 @@ public class ProjectEndpoint{
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response post(Project p){
-        em.persist(p);
-        return Response.ok().entity(p).build();
+    public Response post(Student s){
+        em.persist(s);
+        return Response.ok().entity(s).build();
     }
 }

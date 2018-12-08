@@ -1,11 +1,12 @@
 package at.htl.projects.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "person")
+@Inheritance(strategy = InheritanceType.JOINED)
+@NamedQueries({
+        @NamedQuery(name = "Person.findById",query = "SELECT p FROM person p where p.id = :Id")
+})
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

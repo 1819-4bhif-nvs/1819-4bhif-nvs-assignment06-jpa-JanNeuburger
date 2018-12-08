@@ -8,10 +8,9 @@ import at.htl.projects.model.Teacher;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Startup
 @Singleton
@@ -37,19 +36,47 @@ public class InitBean {
         Teacher egger = new Teacher("Mia", "Egger");
         Teacher haas = new Teacher("Helene", "Haas");
 
+        em.persist(wimmer);
+        em.persist(riedl);
+        em.persist(kress);
+        em.persist(pichler);
+        em.persist(schuster);
+        em.persist(weinheber);
+        em.persist(bauer);
+        em.persist(winkler);
+        em.persist(haspel);
+        em.persist(schwarz);
+        em.persist(waltz);
+        em.persist(egger);
+        em.persist(haas);
+
         Project mig = new Project("MakeItGo","NAO-Soccer Project");
         Project ear = new Project("Einnahmen-Ausgaben-Rechnung","Programm für eBanking");
         Project voting = new Project("Music Voting", "Programm zur Musikabstimmung bei Festen");
         Project houseAutomation = new Project("Hausautomation","Visualisierung für SmartHome");
         Project leonie = new Project("Leonie","Avatar der HTL-Leonding");
 
-        Meeting m1 = new Meeting(LocalDate.now(),"Sprint Review Oktober");
-        Meeting m2 = new Meeting(LocalDate.now().plusMonths(1), "Sprint Review November");
-        Meeting e1 = new Meeting(LocalDate.now().plusDays(20), "Elba Testsitzng");
-        Meeting e2 = new Meeting(LocalDate.now().plusWeeks(6), "George Testsitzung");
-        Meeting v1 = new Meeting(LocalDate.now().plusDays(3), "Spotify Besprechung");
-        Meeting h1 = new Meeting(LocalDate.now(), "Sensorentest");
-        Meeting l1 = new Meeting(LocalDate.now().plusMonths(2), "Tag der offenen Tür Generalprobe");
+        em.persist(mig);
+        em.persist(ear);
+        em.persist(voting);
+        em.persist(houseAutomation);
+        em.persist(leonie);
+
+        Meeting m1 = new Meeting(LocalDateTime.now(),"Sprint Review Oktober");
+        Meeting m2 = new Meeting(LocalDateTime.now().plusMonths(1), "Sprint Review November");
+        Meeting e1 = new Meeting(LocalDateTime.now().plusDays(20), "Elba Testsitzng");
+        Meeting e2 = new Meeting(LocalDateTime.now().plusWeeks(6), "George Testsitzung");
+        Meeting v1 = new Meeting(LocalDateTime.now().plusDays(3), "Spotify Besprechung");
+        Meeting h1 = new Meeting(LocalDateTime.now(), "Sensorentest");
+        Meeting l1 = new Meeting(LocalDateTime.now().plusMonths(2), "Tag der offenen Tür Generalprobe");
+
+        em.persist(m1);
+        em.persist(m2);
+        em.persist(e1);
+        em.persist(e2);
+        em.persist(v1);
+        em.persist(h1);
+        em.persist(l1);
 
         mig.getMembers().add(wimmer);
         mig.getMembers().add(weinheber);
@@ -93,31 +120,6 @@ public class InitBean {
         houseAutomation.getMeetings().add(h1);
         leonie.getMeetings().add(l1);
 
-        em.persist(wimmer);
-        em.persist(riedl);
-        em.persist(kress);
-        em.persist(pichler);
-        em.persist(schuster);
-        em.persist(weinheber);
-        em.persist(bauer);
-        em.persist(winkler);
-        em.persist(haspel);
-        em.persist(schwarz);
-        em.persist(waltz);
-        em.persist(egger);
-        em.persist(haas);
-        em.persist(mig);
-        em.persist(ear);
-        em.persist(voting);
-        em.persist(houseAutomation);
-        em.persist(leonie);
-        em.persist(m1);
-        em.persist(m2);
-        em.persist(e1);
-        em.persist(e2);
-        em.persist(v1);
-        em.persist(h1);
-        em.persist(l1);
         System.out.println("Finished");
     }
 }

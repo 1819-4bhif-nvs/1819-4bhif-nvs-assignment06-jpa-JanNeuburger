@@ -4,9 +4,6 @@ import javax.persistence.*;
 
 @Entity(name = "student")
 public class Student extends Person{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     private String matNumber;
 
@@ -19,5 +16,17 @@ public class Student extends Person{
         super(firstName, lastName);
         this.matNumber = matNumber;
     }
+    //endregion
+
+    //region Getter and Setter
+
+    public String getMatNumber() {
+        return matNumber;
+    }
+
+    public void setMatNumber(String matNumber) {
+        this.matNumber = matNumber;
+    }
+
     //endregion
 }

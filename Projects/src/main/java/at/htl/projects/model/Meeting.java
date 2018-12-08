@@ -3,7 +3,7 @@ package at.htl.projects.model;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,19 +13,19 @@ public class Meeting {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalDate date;
+    private LocalDateTime date;
     private String description;
 
     @JsonbTransient
     @XmlTransient
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<Person> attendants;
 
     //region Constructors
     public Meeting(){
         attendants = new LinkedList<Person>();
     }
-    public Meeting(LocalDate date, String description){
+    public Meeting(LocalDateTime date, String description){
         attendants = new LinkedList<Person>();
         this.date = date;
         this.description = description;
@@ -41,11 +41,11 @@ public class Meeting {
         this.id = id;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

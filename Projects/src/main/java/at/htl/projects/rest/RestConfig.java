@@ -1,5 +1,8 @@
 package at.htl.projects.rest;
 
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
-public class RestConfig {
+@ApplicationPath("api")
+public class RestConfig extends Application {
 }

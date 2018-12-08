@@ -7,10 +7,6 @@ import javax.persistence.Id;
 
 @Entity(name = "teacher")
 public class Teacher extends Person{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     private String title;
 
     //region Constructors
@@ -22,5 +18,17 @@ public class Teacher extends Person{
         super(firstName, lastName);
         this.title = title;
     }
+    //endregion
+
+    //region Getter and Setter
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     //endregion
 }

@@ -7,6 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity(name = "project")
+@NamedQueries({
+        @NamedQuery(name = "Project.findById",query = "SELECT p FROM project p WHERE p.id = :Id")
+})
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,17 +20,17 @@ public class Project {
 
     @JsonbTransient
     @XmlTransient
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<Student> members;
 
     @JsonbTransient
     @XmlTransient
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Teacher supervisor;
 
     @JsonbTransient
     @XmlTransient
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<Meeting> meetings;
 
     //region Constructors
