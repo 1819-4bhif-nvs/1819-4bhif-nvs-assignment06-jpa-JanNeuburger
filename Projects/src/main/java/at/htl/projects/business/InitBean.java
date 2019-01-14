@@ -11,6 +11,7 @@ import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Startup
 @Singleton
@@ -29,32 +30,24 @@ public class InitBean {
         Student weinheber = new Student("Marlene", "Weinheber","if6");
         Student bauer = new Student("Celine", "Bauer","if7");
         Student winkler = new Student("Sophie", "Winkler","if8");
+        List<Object> students = List.of(wimmer,riedl,kress,pichler,schuster,weinheber,bauer,winkler);
 
         Teacher haspel = new Teacher("Valentin", "Haspel","Prof");
         Teacher schwarz = new Teacher("Levi", "Schwarz","Dr");
         Teacher waltz = new Teacher("Emil", "Waltz","Mag");
         Teacher egger = new Teacher("Mia", "Egger","Dipl Ing");
         Teacher haas = new Teacher("Helene", "Haas","PhD");
+        List<Object> teachers = List.of(haspel,schwarz,waltz,egger,haas);
 
-        em.persist(wimmer);
-        em.persist(riedl);
-        em.persist(kress);
-        em.persist(pichler);
-        em.persist(schuster);
-        em.persist(weinheber);
-        em.persist(bauer);
-        em.persist(winkler);
-        em.persist(haspel);
-        em.persist(schwarz);
-        em.persist(waltz);
-        em.persist(egger);
-        em.persist(haas);
+        persistList(students);
+        persistList(teachers);
 
         Project mig = new Project("MakeItGo","NAO-Soccer Project");
         Project ear = new Project("Einnahmen-Ausgaben-Rechnung","Programm für eBanking");
-        Project voting = new Project("Music Voting", "Programm zur Musikabstimmung bei Festen");
+        Project voting = new Project("Music Voting", "Programm zur Musikabstimmung bei Parties");
         Project houseAutomation = new Project("Hausautomation","Visualisierung für SmartHome");
         Project leonie = new Project("Leonie","Avatar der HTL-Leonding");
+        List<Object> projects = List.of(mig,ear,voting,houseAutomation,leonie);
 
         Meeting m1 = new Meeting(LocalDateTime.now(),"Sprint Review Oktober");
         Meeting m2 = new Meeting(LocalDateTime.now().plusMonths(1), "Sprint Review November");
@@ -63,6 +56,7 @@ public class InitBean {
         Meeting v1 = new Meeting(LocalDateTime.now().plusDays(3), "Spotify Besprechung");
         Meeting h1 = new Meeting(LocalDateTime.now(), "Sensorentest");
         Meeting l1 = new Meeting(LocalDateTime.now().plusMonths(2), "Tag der offenen Tür Generalprobe");
+        List<Object> meetings = List.of(m1,m2,e1,e2,v1,h1,l1);
 
 //        wimmer.getMeetings().add(m1);
 //        m1.getAttendants().add(wimmer);
@@ -124,20 +118,16 @@ public class InitBean {
         houseAutomation.getMeetings().add(h1);
         leonie.getMeetings().add(l1);
 
-        em.persist(m1);
-        em.persist(m2);
-        em.persist(e1);
-        em.persist(e2);
-        em.persist(v1);
-        em.persist(h1);
-        em.persist(l1);
+        persistList(meetings);
 
-        em.persist(mig);
-        em.persist(ear);
-        em.persist(voting);
-        em.persist(houseAutomation);
-        em.persist(leonie);
+        persistList(projects);
 
         System.out.println("Finished");
+    }
+
+    private void persistList(List<Object> list){
+        for (Object item: list) {
+            em.persist(item);
+        }
     }
 }
