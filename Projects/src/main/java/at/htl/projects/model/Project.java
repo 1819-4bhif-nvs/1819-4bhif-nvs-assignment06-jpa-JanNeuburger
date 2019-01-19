@@ -18,7 +18,10 @@ public class Project {
     private String name;
     private String description;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(name="membership",
+    joinColumns = @JoinColumn(name = "project_id"),
+    inverseJoinColumns = @JoinColumn(name = "student_id"))
     private List<Student> members;
 
     @OneToOne
@@ -92,4 +95,9 @@ public class Project {
 
 
     //endregion
+
+    public void addMember(Student student){
+        members.add(student);
+        student.getProjects().add(this);
+    }
 }

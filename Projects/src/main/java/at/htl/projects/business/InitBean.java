@@ -39,9 +39,6 @@ public class InitBean {
         Teacher haas = new Teacher("Helene", "Haas","PhD");
         List<Object> teachers = List.of(haspel,schwarz,waltz,egger,haas);
 
-        persistList(students);
-        persistList(teachers);
-
         Project mig = new Project("MakeItGo","NAO-Soccer Project");
         Project ear = new Project("Einnahmen-Ausgaben-Rechnung","Programm für eBanking");
         Project voting = new Project("Music Voting", "Programm zur Musikabstimmung bei Parties");
@@ -95,14 +92,14 @@ public class InitBean {
 //        winkler.getMeetings().add(l1);
 //        l1.getAttendants().add(winkler);
 
-        mig.getMembers().add(wimmer);
-        mig.getMembers().add(weinheber);
-        ear.getMembers().add(riedl);
-        voting.getMembers().add(kress);
-        houseAutomation.getMembers().add(pichler);
-        houseAutomation.getMembers().add(bauer);
-        leonie.getMembers().add(schuster);
-        leonie.getMembers().add(winkler);
+        wimmer.addProject(mig);
+        weinheber.addProject(mig);
+        riedl.addProject(ear);
+        kress.addProject(voting);
+        pichler.addProject(houseAutomation);
+        bauer.addProject(houseAutomation);
+        schuster.addProject(leonie);
+        winkler.addProject(leonie);
 
         mig.setSupervisor(haspel);
         ear.setSupervisor(schwarz);
@@ -118,9 +115,11 @@ public class InitBean {
         houseAutomation.getMeetings().add(h1);
         leonie.getMeetings().add(l1);
 
+        persistList(projects);
+        persistList(students);
+        persistList(teachers);
         persistList(meetings);
 
-        persistList(projects);
 
         System.out.println("Finished");
     }

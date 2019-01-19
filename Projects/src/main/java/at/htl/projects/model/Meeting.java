@@ -1,9 +1,6 @@
 package at.htl.projects.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity(name = "meeting")
@@ -14,6 +11,9 @@ public class Meeting {
 
     private LocalDateTime date;
     private String description;
+
+    @ManyToOne
+    private Project project;
 
     //region Constructors
     public Meeting(){
