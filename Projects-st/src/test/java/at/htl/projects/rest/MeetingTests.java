@@ -4,7 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.json.Json;
+import javax.json.JsonArray;
 import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -12,10 +14,13 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class StudentTests {
+public class MeetingTests {
 
     private Client client;
     private WebTarget tut;
@@ -23,7 +28,7 @@ public class StudentTests {
     @Before
     public void initClient() {
         this.client = ClientBuilder.newClient();
-        this.tut = client.target("http://localhost:8080/Projects/api/students");
+        this.tut = client.target("http://localhost:8080/Projects/api/meetings");
     }
 
     @Test
@@ -37,39 +42,37 @@ public class StudentTests {
     @Test
     public void get() {
         Response response = this.tut
-                .path("10")
+                .path("24")
                 .request(MediaType.APPLICATION_JSON)
                 .get();
         assertThat(response.getStatus(), is(200));
         JsonObject payload = response.readEntity(JsonObject.class);
-        assertThat(payload.getString("matNumber"), is("if5"));
+        assertThat(payload.getString("description"), is("Sensorentest"));
     }
 
     @Test
     public void post() {
-        JsonObject student = Json.createObjectBuilder()
-                .add("firstName", "Florian")
-                .add("lastName", "Schwarcz")
-                .add("matNumber", "if150115")
+        JsonObject meeting = Json.createObjectBuilder()
+                .add("date", "2019-01-20T20:34:42")
+                .add("description", "Test")
                 .build();
         Response response = this.tut
                 .request(MediaType.APPLICATION_JSON)
-                .post(Entity.json(student));
+                .post(Entity.json(meeting));
         assertThat(response.getStatus(), is(200));
         JsonObject payload = response.readEntity(JsonObject.class);
-        assertThat(payload.getString("matNumber"), is("if150115"));
+        assertThat(payload.getString("description"), is("Test"));
     }
 
     @Test
     public void delete() {
-        JsonObject student = Json.createObjectBuilder()
-                .add("firstName", "Florian")
-                .add("lastName", "Schwarcz")
-                .add("matNumber", "if150115")
+        JsonObject meeting = Json.createObjectBuilder()
+                .add("date", "2019-01-20T20:34:42")
+                .add("description", "Test")
                 .build();
         Response response = this.tut
                 .request(MediaType.APPLICATION_JSON)
-                .post(Entity.json(student));
+                .post(Entity.json(meeting));
         assertThat(response.getStatus(), is(200));
         JsonObject payload = response.readEntity(JsonObject.class);
         response = this.tut
@@ -86,28 +89,26 @@ public class StudentTests {
 
     @Test
     public void put() {
-        JsonObject student = Json.createObjectBuilder()
-                .add("firstName", "Florian")
-                .add("lastName", "Schwarcz")
-                .add("matNumber", "if150115")
+        JsonObject meeting = Json.createObjectBuilder()
+                .add("date", "2019-01-20T20:34:42")
+                .add("description", "Test")
                 .build();
         Response response = this.tut
                 .request(MediaType.APPLICATION_JSON)
-                .post(Entity.json(student));
+                .post(Entity.json(meeting));
         assertThat(response.getStatus(), is(200));
         JsonObject payload = response.readEntity(JsonObject.class);
-        JsonObject updateStudent = Json.createObjectBuilder()
+        JsonObject updateMeeting = Json.createObjectBuilder()
                 .add("id", payload.getInt("id"))
-                .add("firstName", payload.getString("firstName"))
-                .add("lastName", "Schwarz")
-                .add("matNumber", payload.getString("matNumber"))
+                .add("date", "2019-02-12T09:01:56")
+                .add("description", payload.getString("description"))
                 .build();
         response = this.tut
                 .request(MediaType.APPLICATION_JSON)
-                .put(Entity.json(updateStudent));
+                .put(Entity.json(updateMeeting));
         assertThat(response.getStatus(), is(200));
         payload = response.readEntity(JsonObject.class);
-        assertThat(payload.getString("lastName"), is("Schwarz"));
+        assertThat(payload.getString("date"), is("2019-02-12T09:01:56"));
     }
 
 }
