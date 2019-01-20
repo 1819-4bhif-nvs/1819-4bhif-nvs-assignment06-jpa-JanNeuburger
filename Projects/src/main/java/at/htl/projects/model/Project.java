@@ -1,15 +1,12 @@
 package at.htl.projects.model;
 
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.LinkedList;
 import java.util.List;
 
+@NamedQuery(name = "Project.findAll", query = "select p from project p")
+@NamedQuery(name = "Project.findById", query = "select p from project p WHERE p.id = :ID")
 @Entity(name = "project")
-@NamedQueries({
-        @NamedQuery(name = "Project.findById",query = "SELECT p FROM project p WHERE p.id = :Id")
-})
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

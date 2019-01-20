@@ -1,14 +1,11 @@
 package at.htl.projects.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
+@NamedQuery(name = "Person.findAll", query = "select p from person p")
+@NamedQuery(name = "Person.findById", query = "select p from person p WHERE p.id = :ID")
 @Entity(name = "person")
 @Inheritance(strategy = InheritanceType.JOINED)
-@NamedQueries({
-        @NamedQuery(name = "Person.findById",query = "SELECT p FROM person p where p.id = :Id")
-})
 @DiscriminatorColumn
 public class Person {
     @Id

@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.util.LinkedList;
 import java.util.List;
 
+@NamedQuery(name = "Student.findAll", query = "select s from student s")
+@NamedQuery(name = "Student.findById", query = "select s from student s WHERE s.id = :ID")
 @Entity(name = "student")
 public class Student extends Person{
 

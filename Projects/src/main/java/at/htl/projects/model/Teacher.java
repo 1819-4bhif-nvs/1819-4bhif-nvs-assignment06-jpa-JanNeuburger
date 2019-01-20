@@ -1,10 +1,9 @@
 package at.htl.projects.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@NamedQuery(name = "Teacher.findAll", query = "select t from teacher t")
+@NamedQuery(name = "Teacher.findById", query = "select t from teacher t WHERE t.id = :ID")
 @Entity(name = "teacher")
 public class Teacher extends Person{
     private String title;

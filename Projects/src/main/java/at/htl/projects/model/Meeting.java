@@ -3,6 +3,8 @@ package at.htl.projects.model;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@NamedQuery(name = "Meeting.findAll", query = "select m from meeting m")
+@NamedQuery(name = "Meeting.findById", query = "select m from meeting m WHERE m.id = :ID")
 @Entity(name = "meeting")
 public class Meeting {
     @Id
